@@ -1,18 +1,52 @@
 'use client';
 
-import Image from 'next/image';
-import { Star, MessageCircle, Phone, ShieldCheck, Zap, ArrowRight, RefreshCw, Award } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { Star, MessageCircle, Phone, ShieldCheck, Zap, ArrowRight, RefreshCw, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { businessConfig, getWhatsAppUrl, getPhoneCallUrl } from '@/config/business';
 
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (isPlaying) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      videoRef.current.play().catch(() => {});
+      setIsPlaying(true);
+    }
+  };
+
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    const newMuted = !isMuted;
+    videoRef.current.muted = newMuted;
+    setIsMuted(newMuted);
+  };
+
   return (
     <section
       id="home"
       aria-label="Welcome to Sainik Electrical & Electronics"
       className="relative overflow-hidden bg-slate-900 pt-6 pb-14 lg:pt-16 lg:pb-24 text-white"
     >
-      {/* Background ambient light effects contained in overflow-hidden */}
+      {/* Background Cinematic Solar Video Header with Scrim */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster="/videos/header-video-poster.jpg"
+          className="absolute inset-0 h-full w-full object-cover opacity-15 filter contrast-125 brightness-75"
+        >
+          <source src="/videos/2249554-uhd_3840_2160_24fps.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/95 to-slate-900/85" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40" />
         <div className="absolute top-0 right-0 h-64 w-64 sm:h-80 sm:w-80 rounded-full bg-red-600/10 blur-3xl" />
         <div className="absolute bottom-0 left-0 h-64 w-64 sm:h-80 sm:w-80 rounded-full bg-amber-500/10 blur-3xl" />
       </div>
@@ -105,31 +139,69 @@ export default function Hero() {
 
           </div>
 
-          {/* Right Column: Hero Visual - Authentic Installation */}
+          {/* Right Column: Hero Visual - Video Showcase */}
           <div className="lg:col-span-5 relative">
             <div className="relative mx-auto max-w-md lg:max-w-none">
               
               {/* Outer decorative glow frame */}
-              <div className="relative rounded-2xl bg-gradient-to-tr from-red-600/30 via-slate-700 to-amber-500/30 p-1 shadow-2xl">
-                <div className="relative overflow-hidden rounded-xl bg-slate-950 aspect-[4/3] sm:aspect-[4/3]">
-                  <Image
-                    src="/images/gallery/commercial-on-grid-solar-installation.jpg"
-                    alt="Sainik Electricals - On-Grid Commercial Solar Installation in Ghazipur"
-                    fill
-                    priority
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-                    className="object-cover transition-transform duration-700 hover:scale-105"
-                  />
-                  {/* Subtle gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/20" />
+              <div className="relative rounded-2xl bg-gradient-to-tr from-red-600/40 via-slate-700 to-amber-500/40 p-1 shadow-2xl">
+                <div className="relative overflow-hidden rounded-xl bg-slate-950 aspect-[4/3] sm:aspect-[4/3] group">
+                  <video
+                    ref={videoRef}
+                    autoPlay
+                    loop
+                    muted={isMuted}
+                    playsInline
+                    poster="/videos/header-video-poster.jpg"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  >
+                    <source src="/videos/2249554-uhd_3840_2160_24fps.mp4" type="video/mp4" />
+                  </video>
 
-                  {/* On-image status pills */}
-                  <div className="absolute top-3 left-3 bg-slate-900/90 backdrop-blur-md rounded-lg px-3 py-1.5 border border-slate-700/80 text-[11px] font-semibold text-amber-300 flex items-center gap-1.5">
-                    <Award className="h-3.5 w-3.5" aria-hidden="true" />
-                    <span>Authorized Distribution Hub</span>
+                  {/* Subtle gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-slate-950/30 pointer-events-none" />
+
+                  {/* Top badges & Controls */}
+                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-auto">
+                    <div className="bg-slate-900/90 backdrop-blur-md rounded-lg px-3 py-1.5 border border-slate-700/80 text-[11px] font-semibold text-amber-300 flex items-center gap-1.5 shadow-md">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                      </span>
+                      <span>Solar Rooftop &amp; Battery Hub</span>
+                    </div>
+
+                    {/* Interactive Play/Pause & Mute controls */}
+                    <div className="flex items-center gap-1.5 bg-slate-900/80 backdrop-blur-md rounded-lg p-1 border border-slate-700/70 shadow-md">
+                      <button
+                        type="button"
+                        onClick={togglePlay}
+                        className="h-7 w-7 rounded-md bg-slate-800 text-white flex items-center justify-center hover:bg-slate-700 transition-colors focus-visible:outline-white"
+                        aria-label={isPlaying ? 'Pause header video' : 'Play header video'}
+                      >
+                        {isPlaying ? (
+                          <Pause className="h-3.5 w-3.5" aria-hidden="true" />
+                        ) : (
+                          <Play className="h-3.5 w-3.5 fill-current ml-0.5" aria-hidden="true" />
+                        )}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={toggleMute}
+                        className="h-7 w-7 rounded-md bg-slate-800 text-white flex items-center justify-center hover:bg-slate-700 transition-colors focus-visible:outline-white"
+                        aria-label={isMuted ? 'Unmute video audio' : 'Mute video audio'}
+                      >
+                        {isMuted ? (
+                          <VolumeX className="h-3.5 w-3.5" aria-hidden="true" />
+                        ) : (
+                          <Volume2 className="h-3.5 w-3.5" aria-hidden="true" />
+                        )}
+                      </button>
+                    </div>
                   </div>
 
-                  <div className="absolute bottom-3 left-3 right-3 bg-slate-900/90 backdrop-blur-md rounded-lg p-3 border border-slate-800 text-xs flex items-center justify-between">
+                  {/* Bottom Location & Open Status Pill */}
+                  <div className="absolute bottom-3 left-3 right-3 bg-slate-900/95 backdrop-blur-md rounded-lg p-3 border border-slate-800 text-xs flex items-center justify-between shadow-lg">
                     <div>
                       <p className="font-bold text-white text-sm">Sainik Electrical &amp; Electronics</p>
                       <p className="text-slate-300 text-[11px]">Station Road, Near Yusufpur Kotwali, Mohammadabad</p>
@@ -168,3 +240,4 @@ export default function Hero() {
     </section>
   );
 }
+

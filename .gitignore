@@ -18,6 +18,8 @@ lighthouse-report*.json
 .DS_Store
 *.pem
 *.mp4
+!public/videos/2249554-uhd_3840_2160_24fps.mp4
+!public/videos/*.mp4
 
 # debug
 npm-debug.log*

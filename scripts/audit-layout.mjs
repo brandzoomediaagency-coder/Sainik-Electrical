@@ -130,6 +130,13 @@ async function run() {
       } else {
         console.log(`✅ [${vp.name}]: Clean fit! Zero horizontal scroll. (Width: ${res.winWidth}px)`);
       }
+
+      // Save screenshot for key breakpoints
+      if (vp.width === 1440 || vp.width === 390) {
+        const ss = await send('Page.captureScreenshot', { format: 'png' });
+        const fs = await import('node:fs');
+        fs.writeFileSync(`screenshots/audit/view-${vp.width}px.png`, Buffer.from(ss.data, 'base64'));
+      }
     }
 
     ws.close();
