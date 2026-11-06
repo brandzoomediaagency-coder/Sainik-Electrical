@@ -73,43 +73,45 @@ export default function SolarSavingsCalculator() {
       aria-labelledby="calculator-heading"
       className="py-20 bg-slate-900 text-white relative overflow-hidden"
     >
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Background glow contained within overflow-hidden */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 sm:w-[500px] h-80 sm:h-[500px] bg-amber-500/5 rounded-full blur-3xl" />
+      </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-amber-300 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20 mb-3">
             <Calculator className="h-3.5 w-3.5" aria-hidden="true" />
             <span>Interactive Power Estimator</span>
           </span>
           <h2
             id="calculator-heading"
-            className="text-3xl font-extrabold text-white sm:text-4xl tracking-tight"
+            className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight"
           >
             Calculate Your Solar Sizing &amp; Battery Backup Needs
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-300">
+          <p className="mt-3 text-sm sm:text-base text-slate-300">
             Tailored algorithms built specifically for power conditions and solar insolation in Ghazipur and Eastern UP.
           </p>
         </div>
 
-        {/* Tab Selection */}
-        <div className="flex justify-center mb-10" role="tablist" aria-label="Calculator Modes">
-          <div className="inline-flex rounded-2xl bg-slate-800 p-1.5 border border-slate-700 shadow-xl">
+        {/* Tab Selection: Fully Responsive */}
+        <div className="flex justify-center mb-8 sm:mb-10 px-2" role="tablist" aria-label="Calculator Modes">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 w-full max-w-lg rounded-2xl bg-slate-800 p-1.5 border border-slate-700 shadow-xl">
             <button
               type="button"
               role="tab"
               aria-selected={activeTab === 'solar'}
               onClick={() => setActiveTab('solar')}
-              className={`flex items-center gap-2 rounded-xl px-5 py-3 text-xs sm:text-sm font-bold transition-all ${
+              className={`flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold transition-all ${
                 activeTab === 'solar'
                   ? 'bg-amber-500 text-slate-950 shadow-md'
                   : 'text-slate-300 hover:text-white hover:bg-slate-700/60'
               }`}
             >
-              <Sun className="h-4 w-4" aria-hidden="true" />
-              <span>Solar Rooftop &amp; Savings Sizer</span>
+              <Sun className="h-4 w-4 shrink-0" aria-hidden="true" />
+              <span>Solar Rooftop &amp; Savings</span>
             </button>
 
             <button
@@ -117,14 +119,14 @@ export default function SolarSavingsCalculator() {
               role="tab"
               aria-selected={activeTab === 'inverter'}
               onClick={() => setActiveTab('inverter')}
-              className={`flex items-center gap-2 rounded-xl px-5 py-3 text-xs sm:text-sm font-bold transition-all ${
+              className={`flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold transition-all ${
                 activeTab === 'inverter'
                   ? 'bg-amber-500 text-slate-950 shadow-md'
                   : 'text-slate-300 hover:text-white hover:bg-slate-700/60'
               }`}
             >
-              <BatteryCharging className="h-4 w-4" aria-hidden="true" />
-              <span>Inverter &amp; Battery Backup Sizer</span>
+              <BatteryCharging className="h-4 w-4 shrink-0" aria-hidden="true" />
+              <span>Inverter &amp; Battery Backup</span>
             </button>
           </div>
         </div>
@@ -264,7 +266,7 @@ export default function SolarSavingsCalculator() {
                   <button
                     type="button"
                     onClick={() => setFans(Math.max(1, fans - 1))}
-                    className="h-8 w-8 rounded-lg bg-slate-800 text-white font-bold hover:bg-slate-700 flex items-center justify-center"
+                    className="h-10 w-10 rounded-xl bg-slate-800 text-white font-extrabold text-lg hover:bg-slate-700 flex items-center justify-center active:scale-95 transition-transform"
                     aria-label="Decrease fans"
                   >
                     -
@@ -273,13 +275,13 @@ export default function SolarSavingsCalculator() {
                   <button
                     type="button"
                     onClick={() => setFans(Math.min(8, fans + 1))}
-                    className="h-8 w-8 rounded-lg bg-slate-800 text-white font-bold hover:bg-slate-700 flex items-center justify-center"
+                    className="h-10 w-10 rounded-xl bg-slate-800 text-white font-extrabold text-lg hover:bg-slate-700 flex items-center justify-center active:scale-95 transition-transform"
                     aria-label="Increase fans"
                   >
                     +
                   </button>
                 </div>
-                <span className="text-[10px] text-slate-500 mt-2 text-center">{fans * 75} Watts total</span>
+                <span className="text-[10px] text-slate-400 mt-2 text-center">{fans * 75} Watts total</span>
               </div>
 
               {/* LED Lights */}
@@ -292,7 +294,7 @@ export default function SolarSavingsCalculator() {
                   <button
                     type="button"
                     onClick={() => setLights(Math.max(1, lights - 1))}
-                    className="h-8 w-8 rounded-lg bg-slate-800 text-white font-bold hover:bg-slate-700 flex items-center justify-center"
+                    className="h-10 w-10 rounded-xl bg-slate-800 text-white font-extrabold text-lg hover:bg-slate-700 flex items-center justify-center active:scale-95 transition-transform"
                     aria-label="Decrease lights"
                   >
                     -
@@ -301,7 +303,7 @@ export default function SolarSavingsCalculator() {
                   <button
                     type="button"
                     onClick={() => setLights(Math.min(15, lights + 1))}
-                    className="h-8 w-8 rounded-lg bg-slate-800 text-white font-bold hover:bg-slate-700 flex items-center justify-center"
+                    className="h-10 w-10 rounded-xl bg-slate-800 text-white font-extrabold text-lg hover:bg-slate-700 flex items-center justify-center active:scale-95 transition-transform"
                     aria-label="Increase lights"
                   >
                     +

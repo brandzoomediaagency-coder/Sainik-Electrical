@@ -121,8 +121,10 @@ export default function ContactSection() {
           
           {/* Direct Details Column */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="rounded-3xl bg-slate-900 text-white p-8 shadow-xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 -mt-10 -mr-10 h-40 w-40 rounded-full bg-red-600/20 blur-2xl pointer-events-none" />
+            <div className="rounded-3xl bg-slate-900 text-white p-6 sm:p-8 shadow-xl relative overflow-hidden">
+              <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+                <div className="absolute top-0 right-0 h-36 w-36 rounded-full bg-red-600/20 blur-2xl" />
+              </div>
 
               <h3 className="text-xl font-bold mb-6">Contact Information</h3>
 
@@ -252,7 +254,7 @@ export default function ContactSection() {
                     placeholder="e.g. Anand Kumar"
                     aria-invalid={!!errors.name}
                     aria-describedby={errors.name ? 'name-error' : undefined}
-                    className={`w-full rounded-xl border bg-white px-4 py-3.5 text-sm text-slate-900 transition-colors focus-visible:outline-brand-red ${
+                    className={`w-full rounded-xl border bg-white px-4 py-3.5 text-base text-slate-900 transition-colors focus-visible:outline-brand-red ${
                       errors.name && touched.name ? 'border-red-500 bg-red-50/20' : 'border-slate-300'
                     }`}
                   />
@@ -283,7 +285,7 @@ export default function ContactSection() {
                     placeholder="e.g. 9838612595"
                     aria-invalid={!!errors.phone}
                     aria-describedby={errors.phone ? 'phone-error' : undefined}
-                    className={`w-full rounded-xl border bg-white px-4 py-3.5 text-sm text-slate-900 transition-colors focus-visible:outline-brand-red ${
+                    className={`w-full rounded-xl border bg-white px-4 py-3.5 text-base text-slate-900 transition-colors focus-visible:outline-brand-red ${
                       errors.phone && touched.phone ? 'border-red-500 bg-red-50/20' : 'border-slate-300'
                     }`}
                   />
@@ -306,7 +308,7 @@ export default function ContactSection() {
                     value={formData.service}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-sm text-slate-900 transition-colors focus-visible:outline-brand-red"
+                    className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-base text-slate-900 transition-colors focus-visible:outline-brand-red"
                   >
                     <option value="Inverter Batteries (Exide / Luminous / Microtek)">
                       Inverter Batteries (Exide / Luminous / Microtek)
@@ -344,7 +346,7 @@ export default function ContactSection() {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Tell us your current power issue, battery Ah needed, or village location..."
-                    className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 transition-colors focus-visible:outline-brand-red"
+                    className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 transition-colors focus-visible:outline-brand-red"
                   />
                 </div>
 

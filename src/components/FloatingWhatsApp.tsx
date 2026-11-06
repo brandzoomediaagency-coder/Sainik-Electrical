@@ -47,12 +47,12 @@ export default function FloatingWhatsApp() {
         </a>
       </div>
 
-      {/* Mobile Sticky CTA Bar (Bottom) */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-white/95 backdrop-blur-md border-t border-slate-200 p-2.5 px-4 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
-        <div className="grid grid-cols-2 gap-3">
+      {/* Mobile Sticky CTA Bar (Bottom) with Safe-Area Inset Support */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-white/95 backdrop-blur-md border-t border-slate-200 p-2.5 px-4 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] pb-[max(0.625rem,env(safe-area-inset-bottom))]">
+        <div className="grid grid-cols-2 gap-3 max-w-md mx-auto">
           <a
             href={getPhoneCallUrl()}
-            className="flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-slate-50 py-3 text-xs font-bold text-slate-800 shadow-sm active:bg-slate-100"
+            className="flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-slate-50 py-3 text-xs font-bold text-slate-800 shadow-sm active:bg-slate-100 min-h-[48px]"
           >
             <Phone className="h-4 w-4 text-red-700" aria-hidden="true" />
             <span>Call Now</span>
@@ -62,7 +62,7 @@ export default function FloatingWhatsApp() {
             href={getWhatsAppUrl(businessConfig.whatsapp.defaultMessage)}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded-xl bg-emerald-700 py-3 text-xs font-bold text-white shadow-sm active:bg-emerald-800"
+            className="flex items-center justify-center gap-2 rounded-xl bg-emerald-700 py-3 text-xs font-bold text-white shadow-sm active:bg-emerald-800 min-h-[48px]"
           >
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
             <span>WhatsApp</span>

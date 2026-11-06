@@ -83,7 +83,7 @@ export default function Navbar() {
             href="#home"
             className="flex items-center gap-3 focus-visible:outline-brand-red rounded-lg"
           >
-            <div className="relative h-11 w-36 sm:h-12 sm:w-44">
+            <div className="relative h-10 w-32 sm:h-12 sm:w-44">
               <Image
                 src="/images/brand/logo.png"
                 alt="Sainik Electrical & Electronics - Best battery distributor in Ghazipur"

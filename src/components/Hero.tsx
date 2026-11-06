@@ -9,32 +9,34 @@ export default function Hero() {
     <section
       id="home"
       aria-label="Welcome to Sainik Electrical & Electronics"
-      className="relative overflow-hidden bg-slate-900 pt-8 pb-16 lg:pt-16 lg:pb-24 text-white"
+      className="relative overflow-hidden bg-slate-900 pt-6 pb-14 lg:pt-16 lg:pb-24 text-white"
     >
-      {/* Background ambient light effects */}
-      <div className="absolute top-0 right-0 -mt-20 -mr-20 h-96 w-96 rounded-full bg-brand-red/10 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 -mb-20 -ml-20 h-96 w-96 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
+      {/* Background ambient light effects contained in overflow-hidden */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="absolute top-0 right-0 h-64 w-64 sm:h-80 sm:w-80 rounded-full bg-red-600/10 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-64 w-64 sm:h-80 sm:w-80 rounded-full bg-amber-500/10 blur-3xl" />
+      </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
           
           {/* Left Column: Value Proposition & High Conversion CTAs */}
           <div className="lg:col-span-7 flex flex-col justify-center">
             
             {/* Top Verified Google Rating Badge */}
-            <div className="inline-flex items-center gap-2 self-start rounded-full bg-slate-800/90 border border-slate-700/80 px-3.5 py-1.5 text-xs font-medium text-slate-200 backdrop-blur-md mb-6">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 self-start rounded-full bg-slate-800/90 border border-slate-700/80 px-3 py-1.5 text-[11px] sm:text-xs font-medium text-slate-200 backdrop-blur-md mb-4 sm:mb-6">
               <span className="flex text-amber-400" role="img" aria-label="5 out of 5 stars rating">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
+                  <Star key={i} className="h-3 w-3 sm:h-3.5 sm:w-3.5 fill-current" aria-hidden="true" />
                 ))}
               </span>
               <span className="font-bold text-amber-400">4.9 / 5.0</span>
               <span className="text-slate-400" aria-hidden="true">|</span>
-              <span className="text-slate-300">Google Verified Battery Distributor in Ghazipur</span>
+              <span className="text-slate-300 truncate">Google Verified Distributor</span>
             </div>
 
             {/* Main H1 - Clear, Specific, Customer-focused */}
-            <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-5xl sm:leading-tight lg:text-5xl xl:text-6xl">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-white leading-tight">
               Power Your Home &amp; Business with Ghazipur&apos;s{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-amber-400 to-amber-300">
                 #1 Battery &amp; Solar Distributor
