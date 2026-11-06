@@ -495,3 +495,4 @@ export function getWhatsAppUrl(customMessage?: string): string {
 export function getPhoneCallUrl(): string {
   return `tel:${businessConfig.phones.primary}`;
 }
+

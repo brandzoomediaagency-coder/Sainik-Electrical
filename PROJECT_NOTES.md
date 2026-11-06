@@ -99,3 +99,4 @@
   - Interactive Contact & Quick Quote form with client-side validation and WhatsApp fallback.
   - Google Maps live embed, "Get Directions" deep link, and Verified Review badges.
 * **SEO & Local Schema:** Full `LocalBusiness` / `Store` JSON-LD schema with coordinates, opening hours, areaServed, telephone, and aggregate rating.
+

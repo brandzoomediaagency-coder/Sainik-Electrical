@@ -181,3 +181,4 @@ The following items are currently kept configurable and flagged for final client
    - The contact form currently connects directly to WhatsApp with a pre-filled structured message. If the client wants email notifications or CRM storage (e.g. Formspree, Resend, or Zoho), an API key can be plugged into Next.js Route Handlers.
 4. **GST Number Display:**
    - A GST number `27AJGPM7650K1ZR` was noted on the older web template. Since `27` is a Maharashtra state code and Ghazipur is Uttar Pradesh (`09`), we have flagged this for client confirmation before publishing on customer-facing invoices.
+
