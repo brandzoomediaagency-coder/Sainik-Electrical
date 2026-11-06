@@ -53,10 +53,10 @@ Full research findings and source verifications are documented in [`PROJECT_NOTE
    - Dual high-contrast CTAs: "Instant WhatsApp Enquiry" and "Call Now".
    - Authentic commercial rooftop solar project hero visual.
 
-3. **Interactive Solar Sizing & Savings Calculator (Digital Salesperson):**
-   - Slider allowing customers to set their monthly electricity bill (₹1,000 to ₹25,000+).
-   - Real-time calculation of recommended solar kW capacity, daily units generated, 25-year bill savings, and rooftop area required.
-   - One-click CTA opening WhatsApp with pre-filled load details.
+3. **Interactive Dual-Mode Solar Sizing & Inverter Backup Sizer (Digital Salesperson):**
+   - **Tab 1 — Solar Rooftop & Savings:** Interactive slider allowing customers to set their monthly electricity bill (₹1,000 to ₹25,000+), calculating recommended solar kW capacity, daily units generated, 25-year bill savings, and rooftop area required.
+   - **Tab 2 — Inverter & Battery Backup Sizer:** Interactive appliance toggles (Ceiling Fans, LED Lights, Smart TVs, Inverter Refrigerators) calculating peak running wattage, required pure sine wave inverter VA, and recommended battery Ah capacity (150Ah / 200Ah / 220Ah) with backup run-time.
+   - One-click CTA opening WhatsApp with pre-filled load and capacity calculations.
 
 4. **Dynamic Products & Services Grid:**
    - Inverter Batteries & Power Backup (Exide, Luminous, Microtek).
