@@ -40,13 +40,13 @@ export default function Hero() {
           loop
           muted
           playsInline
-          poster="/videos/header-video-poster.jpg"
-          className="absolute inset-0 h-full w-full object-cover opacity-15 filter contrast-125 brightness-75"
+          poster="/videos/12842821-poster.jpg"
+          className="absolute inset-0 h-full w-full object-cover opacity-25 filter contrast-125 brightness-90"
         >
-          <source src="/videos/2249554-uhd_3840_2160_24fps.mp4" type="video/mp4" />
+          <source src="/videos/12842821_3840_2160_30fps.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/95 to-slate-900/85" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/85 to-slate-900/75" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/50" />
         <div className="absolute top-0 right-0 h-64 w-64 sm:h-80 sm:w-80 rounded-full bg-red-600/10 blur-3xl" />
         <div className="absolute bottom-0 left-0 h-64 w-64 sm:h-80 sm:w-80 rounded-full bg-amber-500/10 blur-3xl" />
       </div>
