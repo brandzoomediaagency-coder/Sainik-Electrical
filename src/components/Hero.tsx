@@ -1,29 +1,57 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Star, MessageCircle, Phone, ShieldCheck, Zap, ArrowRight, RefreshCw, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { businessConfig, getWhatsAppUrl, getPhoneCallUrl } from '@/config/business';
 
 export default function Hero() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const bgVideoRef = useRef<HTMLVideoElement>(null);
+  const featuredVideoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
 
+  // Guarantee autoplay across all mobile, Safari, and Brave strict shields
+  useEffect(() => {
+    const playSafe = (el: HTMLVideoElement | null) => {
+      if (!el) return;
+      el.muted = true;
+      el.defaultMuted = true;
+      const playPromise = el.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // If browser policy blocks auto-play before interaction, start on first scroll or touch
+          const onUserInteract = () => {
+            el.play().catch(() => {});
+            window.removeEventListener('touchstart', onUserInteract);
+            window.removeEventListener('scroll', onUserInteract);
+            window.removeEventListener('click', onUserInteract);
+          };
+          window.addEventListener('touchstart', onUserInteract, { passive: true, once: true });
+          window.addEventListener('scroll', onUserInteract, { passive: true, once: true });
+          window.addEventListener('click', onUserInteract, { once: true });
+        });
+      }
+    };
+
+    playSafe(bgVideoRef.current);
+    playSafe(featuredVideoRef.current);
+  }, []);
+
   const togglePlay = () => {
-    if (!videoRef.current) return;
+    if (!featuredVideoRef.current) return;
     if (isPlaying) {
-      videoRef.current.pause();
+      featuredVideoRef.current.pause();
       setIsPlaying(false);
     } else {
-      videoRef.current.play().catch(() => {});
+      featuredVideoRef.current.play().catch(() => {});
       setIsPlaying(true);
     }
   };
 
   const toggleMute = () => {
-    if (!videoRef.current) return;
+    if (!featuredVideoRef.current) return;
     const newMuted = !isMuted;
-    videoRef.current.muted = newMuted;
+    featuredVideoRef.current.muted = newMuted;
     setIsMuted(newMuted);
   };
 
@@ -31,24 +59,27 @@ export default function Hero() {
     <section
       id="home"
       aria-label="Welcome to Sainik Electrical & Electronics"
-      className="relative overflow-hidden bg-slate-900 pt-6 pb-14 lg:pt-16 lg:pb-24 text-white"
+      className="relative overflow-hidden bg-slate-950 pt-6 pb-14 lg:pt-16 lg:pb-24 text-white"
     >
       {/* Background Cinematic Solar Video Header with Scrim */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <video
+          ref={bgVideoRef}
           autoPlay
           loop
           muted
           playsInline
+          preload="auto"
           poster="/videos/12842821-poster.jpg"
-          className="absolute inset-0 h-full w-full object-cover opacity-25 filter contrast-125 brightness-90"
+          className="absolute inset-0 h-full w-full object-cover opacity-60 lg:opacity-65 filter contrast-110 brightness-95"
         >
           <source src="/videos/12842821_3840_2160_30fps.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/85 to-slate-900/75" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/50" />
-        <div className="absolute top-0 right-0 h-64 w-64 sm:h-80 sm:w-80 rounded-full bg-red-600/10 blur-3xl" />
-        <div className="absolute bottom-0 left-0 h-64 w-64 sm:h-80 sm:w-80 rounded-full bg-amber-500/10 blur-3xl" />
+        {/* Cinematic gradient scrim: darker on left to keep text contrast 100% WCAG AA, clearer on right */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/75 to-slate-950/45" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40" />
+        <div className="absolute top-0 right-0 h-64 w-64 sm:h-80 sm:w-80 rounded-full bg-red-600/15 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-64 w-64 sm:h-80 sm:w-80 rounded-full bg-amber-500/15 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -147,11 +178,12 @@ export default function Hero() {
               <div className="relative rounded-2xl bg-gradient-to-tr from-red-600/40 via-slate-700 to-amber-500/40 p-1 shadow-2xl">
                 <div className="relative overflow-hidden rounded-xl bg-slate-950 aspect-[4/3] sm:aspect-[4/3] group">
                   <video
-                    ref={videoRef}
+                    ref={featuredVideoRef}
                     autoPlay
                     loop
                     muted={isMuted}
                     playsInline
+                    preload="auto"
                     poster="/videos/header-video-poster.jpg"
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   >
